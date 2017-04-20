@@ -16,6 +16,7 @@ export default class Resolver {
   }
 
   moduleNameForFullName(fullName) {
+    // TODO: development assertion or warning if not already normalized
     let index = fullName.indexOf(':');
     let type = fullName.substring(0, index)
     let name = fullName.substring(index, fullName.length);
@@ -34,8 +35,9 @@ export default class Resolver {
     let moduleName = this.moduleNameForFullName(fullName);
 
     if (require.has(moduleName)) {
+      // hit
       return require(moduleName)['default'];
-    } else {
     }
+    // miss
   }
 }
