@@ -1,4 +1,3 @@
-z
 import require from 'require';
 
 const MATCHER = /(.*):(.*)/;
