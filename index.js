@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'strict-resolver'
+  name: 'ember-strict-resolver'
 };

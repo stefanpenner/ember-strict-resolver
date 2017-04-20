@@ -1,6 +1,10 @@
-# strict-resolver
+# ember-strict-resolver
 
-This README outlines the details of collaborating on this Ember addon.
+Fast, concise, zero fun resolver for ember apps.
+
+```
+ember install ember-strict-resolver
+```
 
 ## Installation
 
