@@ -1,6 +1,5 @@
 import require from 'require';
 
-const MATCHER = /(.*):(.*)/;
 export default class Resolver {
   constructor(attrs) {
     this.namespace = attrs.namespace;
