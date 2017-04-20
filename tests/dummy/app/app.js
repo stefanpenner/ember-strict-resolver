@@ -5,8 +5,6 @@ import config from './config/environment';
 
 let App;
 
-Ember.Registry.prototype.normalize = function(i) { return i; }
-
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
 App = Ember.Application.extend({
