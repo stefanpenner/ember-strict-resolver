@@ -11,7 +11,10 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanpenner/ember-strict-resolver.git"
+  },
   "scripts": {
     "build": "ember build",
     "start": "ember server",
