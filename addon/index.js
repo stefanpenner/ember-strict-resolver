@@ -19,7 +19,7 @@ export default class Resolver {
     // TODO: development assertion or warning if not already normalized
     let index = fullName.indexOf(':');
     let type = fullName.substring(0, index)
-    let name = fullName.substring(index, fullName.length);
+    let name = fullName.substring(index + 1, fullName.length);
     let moduleName = this.modulePrefix + '/';
 
     if (name === 'main') {
