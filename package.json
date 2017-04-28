@@ -1,6 +1,6 @@
 {
   "name": "ember-strict-resolver",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A fast concise resolver for ember",
   "keywords": [
     "ember-addon"
