@@ -1,6 +1,6 @@
 {
   "name": "ember-strict-resolver",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A fast concise resolver for ember",
   "keywords": [
     "ember-addon"
@@ -21,7 +21,7 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.0.0-beta.10"
+    "ember-cli-babel": "^6.1.0"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
