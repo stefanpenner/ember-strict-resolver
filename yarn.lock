@@ -15,10 +15,6 @@
   version "0.1.11"
   resolved "https://registry.npmjs.org/@glimmer/di/-/di-0.1.11.tgz#a6878c07a13a2c2c76fcde598a5c97637bfc4280"
 
-"@glimmer/di@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.npmjs.org/@glimmer/di/-/di-0.2.0.tgz#73bfd4a6ee4148a80bf092e8a5d29bcac9d4ce7e"
-
 "@glimmer/interfaces@^0.22.0":
   version "0.22.0"
   resolved "https://registry.npmjs.org/@glimmer/interfaces/-/interfaces-0.22.0.tgz#69915fb6416e9cf024c73178ced513b475944baa"
@@ -51,12 +47,6 @@
   resolved "https://registry.npmjs.org/@glimmer/reference/-/reference-0.22.0.tgz#1b3cf62f100caad14052c3844de8626a89601177"
   dependencies:
     "@glimmer/util" "^0.22.0"
-
-"@glimmer/resolver@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.npmjs.org/@glimmer/resolver/-/resolver-0.3.0.tgz#65451a2195259ce26518715631c38dd7c144e821"
-  dependencies:
-    "@glimmer/di" "^0.2.0"
 
 "@glimmer/runtime@^0.22.0":
   version "0.22.0"
@@ -527,12 +517,6 @@ babel-plugin-constant-folding@^1.0.1:
 babel-plugin-dead-code-elimination@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/babel-plugin-dead-code-elimination/-/babel-plugin-dead-code-elimination-1.0.2.tgz#5f7c451274dcd7cccdbfbb3e0b85dd28121f0f65"
-
-babel-plugin-debug-macros@^0.1.1:
-  version "0.1.6"
-  resolved "https://registry.npmjs.org/babel-plugin-debug-macros/-/babel-plugin-debug-macros-0.1.6.tgz#6e0a29c6f3c3e122a8bd6fdb41fc2475d8f894ce"
-  dependencies:
-    semver "^5.3.0"
 
 babel-plugin-eval@^1.0.1:
   version "1.0.1"
@@ -1160,7 +1144,7 @@ broccoli-funnel-reducer@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/broccoli-funnel-reducer/-/broccoli-funnel-reducer-1.0.0.tgz#11365b2a785aec9b17972a36df87eef24c5cc0ea"
 
-broccoli-funnel@^1.0.0, broccoli-funnel@^1.0.1, broccoli-funnel@^1.0.6, broccoli-funnel@^1.1.0:
+broccoli-funnel@^1.0.0, broccoli-funnel@^1.0.1, broccoli-funnel@^1.0.6:
   version "1.2.0"
   resolved "https://registry.npmjs.org/broccoli-funnel/-/broccoli-funnel-1.2.0.tgz#cddc3afc5ff1685a8023488fff74ce6fb5a51296"
   dependencies:
@@ -1880,7 +1864,7 @@ ember-cli-babel@^5.1.3, ember-cli-babel@^5.1.5:
     ember-cli-version-checker "^1.0.2"
     resolve "^1.1.2"
 
-ember-cli-babel@^6.0.0-beta.3, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.0.0-beta.9:
+ember-cli-babel@^6.0.0-beta.10, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.0.0-beta.9:
   version "6.0.0-beta.10"
   resolved "https://registry.npmjs.org/ember-cli-babel/-/ember-cli-babel-6.0.0-beta.10.tgz#71cc6bef05be99c6e7ea4637c444392014a6b775"
   dependencies:
@@ -2186,27 +2170,15 @@ ember-qunit@^2.0.0-beta.1:
   dependencies:
     ember-test-helpers "^0.6.0-beta.1"
 
-ember-resolver@^4.0.0:
-  version "4.1.0"
-  resolved "https://registry.npmjs.org/ember-resolver/-/ember-resolver-4.1.0.tgz#f02aeb2f1f2e944ed47e085412a7b84f759d11df"
-  dependencies:
-    "@glimmer/resolver" "^0.3.0"
-    babel-plugin-debug-macros "^0.1.1"
-    broccoli-funnel "^1.1.0"
-    broccoli-merge-trees "^2.0.0"
-    ember-cli-babel "^6.0.0-beta.7"
-    ember-cli-version-checker "^1.1.6"
-    resolve "^1.3.2"
-
 ember-router-generator@^1.0.0:
   version "1.2.3"
   resolved "https://registry.npmjs.org/ember-router-generator/-/ember-router-generator-1.2.3.tgz#8ed2ca86ff323363120fc14278191e9e8f1315ee"
   dependencies:
     recast "^0.11.3"
 
-ember-source@~2.13.0-beta.1:
-  version "2.13.0-beta.2"
-  resolved "https://registry.npmjs.org/ember-source/-/ember-source-2.13.0-beta.2.tgz#9dedf4826602c9e3418b65f13e08246e3049265a"
+ember-source@~2.13.0-beta.2:
+  version "2.13.0"
+  resolved "https://registry.npmjs.org/ember-source/-/ember-source-2.13.0.tgz#82c47299beecee20b21c14404693f2dff32bbc07"
   dependencies:
     "@glimmer/compiler" "^0.22.0"
     "@glimmer/di" "^0.1.8"
@@ -4579,7 +4551,7 @@ resolve-from@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/resolve-from/-/resolve-from-1.0.1.tgz#26cbfe935d1aeeeabb29bc3fe5aeb01e93d44226"
 
-resolve@^1.1.2, resolve@^1.1.6, resolve@^1.1.7, resolve@^1.3.0, resolve@^1.3.2:
+resolve@^1.1.2, resolve@^1.1.6, resolve@^1.1.7, resolve@^1.3.0:
   version "1.3.2"
   resolved "https://registry.npmjs.org/resolve/-/resolve-1.3.2.tgz#1f0442c9e0cbb8136e87b9305f932f46c7f28235"
   dependencies:
