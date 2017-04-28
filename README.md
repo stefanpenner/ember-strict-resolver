@@ -1,5 +1,7 @@
 # ember-strict-resolver
 
+[![Build Status](https://travis-ci.org/stefanpenner/ember-strict-resolver.svg?branch=master)](https://travis-ci.org/stefanpenner/ember-strict-resolver)
+
 Fast, concise, zero fun resolver for ember apps.
 
 ```
