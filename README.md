@@ -4,16 +4,24 @@
 
 Fast, concise, zero fun resolver for ember apps.
 
+## installation
 ```
 ember install ember-strict-resolver
 ```
 
-## Installation
+## Usage
+
+in app/resolver.js
+```js
+export { default } from 'ember-strict-resolver';
+```
+
+
+# Development of the addon
 
 * `git clone <repository-url>` this repository
 * `cd strict-resolver`
-* `npm install`
-* `bower install`
+* `yarn install`
 
 ## Running
 
