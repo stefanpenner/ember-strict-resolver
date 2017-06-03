@@ -8,10 +8,6 @@ module.exports = function(defaults) {
     babel: {
       loose: true,
     },
-
-    vendorFiles: {
-      'jquery.js': null,
-    }
   });
 
   /*
