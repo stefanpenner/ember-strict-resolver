@@ -7,8 +7,9 @@ Ember.Registry.prototype.normalize = function(i) { return i; }
 
 export default class Resolver {
   constructor(attrs) {
-    this.namespace = attrs.namespace;
-    this.modulePrefix = this.namespace.modulePrefix;
+    if (attrs) {
+      this.namespace = attrs.namespace;
+    }
   }
 
   static create(args) {
@@ -20,7 +21,7 @@ export default class Resolver {
     let index = fullName.indexOf(':');
     let type = fullName.substring(0, index)
     let name = fullName.substring(index + 1, fullName.length);
-    let moduleName = this.modulePrefix + '/';
+    let moduleName = this.namespace.modulePrefix + '/';
 
     if (name === 'main') {
       moduleName += type;
@@ -39,5 +40,9 @@ export default class Resolver {
       return require(moduleName)['default'];
     }
     // miss
+  }
+
+  normalize(fullName) {
+    return fullName;
   }
 }
