@@ -18,15 +18,32 @@ export default class Resolver {
 
   moduleNameForFullName(fullName) {
     // TODO: development assertion or warning if not already normalized
-    let index = fullName.indexOf(':');
-    let type = fullName.substring(0, index)
-    let name = fullName.substring(index + 1, fullName.length);
-    let moduleName = this.namespace.modulePrefix + '/';
+    let prefix, type, name, moduleName;
+
+    const fullNameParts = fullName.split('@');
+
+    // HTMLBars uses helper:@content-helper which collides
+    // with ember-cli namespace detection.
+    // This will be removed in a future release of HTMLBars.
+    if (fullNameParts.length === 2 && fullName !== 'helper:@content-helper') {
+      const prefixParts = fullNameParts[0].split(':');
+
+      if (prefixParts.length === 2) {
+        [type, prefix] = prefixParts;
+        name = fullNameParts[1];
+      } else {
+        prefix = fullNameParts[0];
+        [type, name] = fullNameParts[1].split(':');
+      }
+    } else {
+      prefix = this.namespace.modulePrefix;
+      [type, name] = fullName.split(':');
+    }
 
     if (name === 'main') {
-      moduleName += type;
+      moduleName = `${prefix}/${type}`;
     } else {
-      moduleName += type + 's/' + name;
+      moduleName = `${prefix}/${type}s/${name.replace(/\./g, '/')}`;
     }
 
     return moduleName;
