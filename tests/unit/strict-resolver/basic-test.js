@@ -135,3 +135,67 @@ test("can lookup a view in another namespace with different syntax", function(as
   assert.ok(view, 'view was returned');
   assert.equal(view, expected, 'default export was returned');
 });
+
+test("can lookup a view", function(assert) {
+  assert.expect(3);
+
+  let expected = { isViewFactory: true };
+  define('dummy/views/queue-list', [], function(){
+    assert.ok(true, "view was invoked properly");
+
+    return { default: expected };
+  });
+
+  var view = resolver.resolve('view:queue-list');
+
+  assert.ok(view, 'view was returned');
+  assert.equal(view, expected, 'default export was returned');
+});
+
+test("can lookup a helper", function(assert) {
+  assert.expect(3);
+
+  let expected = { isHelperInstance: true };
+  define('dummy/helpers/reverse-list', [], function(){
+    assert.ok(true, "helper was invoked properly");
+
+    return { default: expected };
+  });
+
+  var helper = resolver.resolve('helper:reverse-list');
+
+  assert.ok(helper, 'helper was returned');
+  assert.equal(helper, expected, 'default export was returned');
+});
+
+test('can lookup an engine', function(assert) {
+  assert.expect(3);
+
+  let expected = {};
+  define('dummy/engine', [], function(){
+    assert.ok(true, 'engine was invoked properly');
+
+    return { default: expected };
+  });
+
+  let engine = resolver.resolve('engine:dummy');
+
+  assert.ok(engine, 'engine was returned');
+  assert.equal(engine, expected, 'default export was returned');
+});
+
+test('can lookup a route-map', function(assert) {
+  assert.expect(3);
+
+  let expected = { isRouteMap: true };
+  define('dummy/routes', [], function(){
+    assert.ok(true, 'route-map was invoked properly');
+
+    return { default: expected };
+  });
+
+  let routeMap = resolver.resolve('route-map:dummy');
+
+  assert.ok(routeMap, 'route-map was returned');
+  assert.equal(routeMap, expected, 'default export was returned');
+});

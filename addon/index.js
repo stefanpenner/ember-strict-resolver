@@ -44,6 +44,10 @@ export default class Resolver {
 
     if (name === 'main') {
       moduleName = `${prefix}/${type}`;
+    } else if (type === 'engine') {
+      moduleName = `${name}/engine`;
+    } else if (type === 'route-map') {
+      moduleName = `${name}/routes`;
     } else {
       moduleName = `${prefix}/${type}s/${name.replace(/\./g, '/')}`;
     }
