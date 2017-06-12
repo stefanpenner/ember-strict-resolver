@@ -29,15 +29,20 @@ export default class Resolver {
       const prefixParts = fullNameParts[0].split(':');
 
       if (prefixParts.length === 2) {
-        [type, prefix] = prefixParts;
+        prefix = prefixParts[1];
+        type = prefixParts[0];
         name = fullNameParts[1];
       } else {
+        const typeNameParts = fullNameParts[1].split(':');
         prefix = fullNameParts[0];
-        [type, name] = fullNameParts[1].split(':');
+        type = typeNameParts[0];
+        name = typeNameParts[1];
       }
     } else {
+      const typeNameParts = fullName.split(':');
       prefix = this.namespace.modulePrefix;
-      [type, name] = fullName.split(':');
+      type = typeNameParts[0];
+      name = typeNameParts[1];
     }
 
     if (name === 'main') {
