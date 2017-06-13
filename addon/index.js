@@ -22,10 +22,7 @@ export default class Resolver {
 
     const fullNameParts = fullName.split('@');
 
-    // HTMLBars uses helper:@content-helper which collides
-    // with ember-cli namespace detection.
-    // This will be removed in a future release of HTMLBars.
-    if (fullNameParts.length === 2 && fullName !== 'helper:@content-helper') {
+    if (fullNameParts.length === 2) {
       const prefixParts = fullNameParts[0].split(':');
 
       if (prefixParts.length === 2) {

@@ -88,22 +88,6 @@ test("can lookup something in another namespace", function(assert){
   assert.equal(adapter, expected, 'default export was returned');
 });
 
-test("can lookup something with an @ sign", function(assert){
-  assert.expect(3);
-
-  let expected = {};
-  define('dummy/helpers/@content-helper', [], function(){
-    assert.ok(true, "helper was invoked properly");
-
-    return { default: expected };
-  });
-
-  var helper = resolver.resolve('helper:@content-helper');
-
-  assert.ok(helper, 'helper was returned');
-  assert.equal(helper, expected, 'default export was returned');
-});
-
 test("can lookup something in another namespace with different syntax", function(assert){
   assert.expect(3);
 
