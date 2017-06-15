@@ -38,6 +38,7 @@
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
+    "ember-native-dom-event-dispatcher": "^0.6.0",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.13.0",
     "ember-welcome-page": "^3.0.0",
@@ -47,6 +48,9 @@
     "node": ">= 4"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "versionCompatibility": {
+      "ember": ">= 2.10.0"
+    }
   }
 }

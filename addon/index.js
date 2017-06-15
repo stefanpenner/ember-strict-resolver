@@ -18,15 +18,34 @@ export default class Resolver {
 
   moduleNameForFullName(fullName) {
     // TODO: development assertion or warning if not already normalized
-    let index = fullName.indexOf(':');
-    let type = fullName.substring(0, index)
-    let name = fullName.substring(index + 1, fullName.length);
-    let moduleName = this.namespace.modulePrefix + '/';
+    let prefix, type, name, moduleName;
+
+    const fullNameParts = fullName.split('@');
+
+    if (fullNameParts.length === 2) {
+      const prefixParts = fullNameParts[0].split(':');
+
+      if (prefixParts.length === 2) {
+        prefix = prefixParts[1];
+        type = prefixParts[0];
+        name = fullNameParts[1];
+      } else {
+        const typeNameParts = fullNameParts[1].split(':');
+        prefix = fullNameParts[0];
+        type = typeNameParts[0];
+        name = typeNameParts[1];
+      }
+    } else {
+      const typeNameParts = fullName.split(':');
+      prefix = this.namespace.modulePrefix;
+      type = typeNameParts[0];
+      name = typeNameParts[1];
+    }
 
     if (name === 'main') {
-      moduleName += type;
+      moduleName = `${prefix}/${type}`;
     } else {
-      moduleName += type + 's/' + name;
+      moduleName = `${prefix}/${type}s/${name.replace(/\./g, '/')}`;
     }
 
     return moduleName;
