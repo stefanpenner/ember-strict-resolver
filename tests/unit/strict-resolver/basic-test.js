@@ -106,54 +106,6 @@ test("can lookup something in another namespace with different syntax", function
   assert.equal(adapter, expected, 'default export was returned');
 });
 
-test("can lookup a view in another namespace", function(assert) {
-  assert.expect(3);
-
-  let expected = { isViewFactory: true };
-  define('other/views/post', [], function(){
-    assert.ok(true, "view was invoked properly");
-
-    return { default: expected };
-  });
-
-  var view = resolver.resolve('other@view:post');
-
-  assert.ok(view, 'view was returned');
-  assert.equal(view, expected, 'default export was returned');
-});
-
-test("can lookup a view in another namespace with different syntax", function(assert) {
-  assert.expect(3);
-
-  let expected = { isViewFactory: true };
-  define('other/views/post', [], function(){
-    assert.ok(true, "view was invoked properly");
-
-    return { default: expected };
-  });
-
-  var view = resolver.resolve('view:other@post');
-
-  assert.ok(view, 'view was returned');
-  assert.equal(view, expected, 'default export was returned');
-});
-
-test("can lookup a view", function(assert) {
-  assert.expect(3);
-
-  let expected = { isViewFactory: true };
-  define('foo-bar/views/queue-list', [], function(){
-    assert.ok(true, "view was invoked properly");
-
-    return { default: expected };
-  });
-
-  var view = resolver.resolve('view:queue-list');
-
-  assert.ok(view, 'view was returned');
-  assert.equal(view, expected, 'default export was returned');
-});
-
 test("can lookup a helper", function(assert) {
   assert.expect(3);
 
