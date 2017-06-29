@@ -1,9 +1,11 @@
 import require from 'require';
 import Ember from 'ember';
 
+const { dasherize } = Ember.String;
+
 // disable the normalization cache as we no longer normalize, the cache has
 // become a bottle neck.
-Ember.Registry.prototype.normalize = function(i) { return i; }
+Ember.Registry.prototype.normalize = function (i) { return i; }
 
 export default class Resolver {
   constructor(attrs) {
@@ -17,7 +19,9 @@ export default class Resolver {
   }
 
   moduleNameForFullName(fullName) {
-    // TODO: development assertion or warning if not already normalized
+    Ember.assert(`Attempted to lookup "${fullName}". Use "${dasherize(fullName)}" instead.`,
+      !fullName.match(/[a-z]+[A-Z]+/));
+
     let prefix, type, name, moduleName;
 
     const fullNameParts = fullName.split('@');
@@ -44,6 +48,10 @@ export default class Resolver {
 
     if (name === 'main') {
       moduleName = `${prefix}/${type}`;
+    } else if (type === 'engine') {
+      moduleName = `${name}/engine`;
+    } else if (type === 'route-map') {
+      moduleName = `${name}/routes`;
     } else {
       moduleName = `${prefix}/${type}s/${name.replace(/\./g, '/')}`;
     }
