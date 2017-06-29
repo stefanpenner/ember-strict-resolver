@@ -1,7 +1,7 @@
 /* globals define, requirejs */
 
 import Ember from 'ember';
-import { module, test, skip } from 'ember-qunit';
+import { module, test } from 'ember-qunit';
 import Resolver from 'ember-strict-resolver';
 
 let originalRegistryEntries, originalEmberAssert, resolver;
@@ -169,29 +169,6 @@ test('warns if looking up a camelCase name', function(assert){
 
   var helper = resolver.resolve('helper:reverseList');
   assert.ok(!helper, 'no helper was returned');
-});
-
-skip('errors if lookup of a route-map does not specify isRouteMap', function(assert) {
-  assert.expect(2);
-
-  let expected = { isRouteMap: false };
-  define('foo-bar/routes', [], function(){
-    assert.ok(true, 'route-map was invoked properly');
-
-    return { default: expected };
-  });
-
-  assert.throws(() => {
-    resolver.resolve('route-map:foo-bar');
-  }, /The route map for foo-bar should be wrapped by 'buildRoutes' before exporting/);
-});
-
-skip("will return the raw value if no 'default' is available", function(assert) {
-  define('foo-bar/fruits/orange', [], function(){
-    return 'is awesome';
-  });
-
-  assert.equal(resolver.resolve('fruit:orange'), 'is awesome', 'adapter was returned');
 });
 
 test("will unwrap the 'default' export automatically", function(assert) {
