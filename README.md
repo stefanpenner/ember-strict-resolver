@@ -19,8 +19,8 @@ export { default } from 'ember-strict-resolver';
 
 # Development of the addon
 
-* `git clone <repository-url>` this repository
-* `cd strict-resolver`
+* `git clone ember-strict-resolver`
+* `cd ember-strict-resolver`
 * `yarn install`
 
 ## Running
@@ -30,7 +30,7 @@ export { default } from 'ember-strict-resolver';
 
 ## Running Tests
 
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
+* `yarn test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
