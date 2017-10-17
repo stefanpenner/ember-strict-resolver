@@ -19,7 +19,7 @@ export { default } from 'ember-strict-resolver';
 
 # Development of the addon
 
-* `git clone ember-strict-resolver`
+* `git clone git@github.com:stefanpenner/ember-strict-resolver.git`
 * `cd ember-strict-resolver`
 * `yarn install`
 
