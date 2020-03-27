@@ -16,6 +16,13 @@ in app/resolver.js
 export { default } from 'ember-strict-resolver';
 ```
 
+_For additional improvements when fully using the ember-strict-resolver monkey patching the registry to no longer cache and simply returning the values passed like the following can be produce extra performance._
+
+```js
+// disable the normalization cache as we no longer normalize, the cache has become a bottle neck.
+Ember.Registry.prototype.normalize = function (i) { return i; }
+```
+
 
 # Development of the addon
 

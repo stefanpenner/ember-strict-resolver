@@ -3,10 +3,6 @@ import Ember from 'ember';
 
 const { dasherize } = Ember.String;
 
-// disable the normalization cache as we no longer normalize, the cache has
-// become a bottle neck.
-Ember.Registry.prototype.normalize = function (i) { return i; }
-
 export default class Resolver {
   constructor(attrs) {
     if (attrs) {
