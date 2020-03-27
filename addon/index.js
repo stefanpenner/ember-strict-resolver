@@ -11,10 +11,6 @@ export default class Resolver {
   }
 
   static create(args) {
-    // disable the normalization cache as we no longer normalize, the cache has
-    // become a bottle neck.
-    Ember.Registry.prototype.normalize = function (i) { return i; }
-
     return new this(args);
   }
 
