@@ -1,16 +1,19 @@
 {
   "name": "ember-strict-resolver",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "1.0.0",
+  "description": "A fast concise resolver for ember",
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
   "license": "MIT",
-  "author": "",
+  "author": "Stefan Penner <stefan.penner@gmail.com",
   "directories": {
     "doc": "doc",
     "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanpenner/ember-strict-resolver.git"
   },
   "scripts": {
     "build": "ember build --environment=production",
