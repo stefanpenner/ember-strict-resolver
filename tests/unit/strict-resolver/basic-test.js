@@ -1,10 +1,11 @@
 /* globals define, requirejs */
 
-import Ember from 'ember';
-import { module, test } from 'ember-qunit';
+import { assign } from '@ember/polyfills';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 import Resolver from 'ember-strict-resolver';
 
-let originalRegistryEntries, originalEmberAssert, resolver;
+let originalRegistryEntries, resolver;
 
 function setupResolver(options) {
   if (!options) {
@@ -16,198 +17,193 @@ function setupResolver(options) {
 
 function resetRegistry() {
   requirejs.clear();
-  Ember.merge(requirejs.entries, originalRegistryEntries);
+  assign(requirejs.entries, originalRegistryEntries);
 }
 
-module('ember-strict-resolver', {
-  beforeEach() {
-    originalRegistryEntries = Ember.merge({}, requirejs.entries);
-    originalEmberAssert = Ember.assert;
+module('Unit | strict-resolver | basic', function(hooks) {
+  setupTest(hooks);
+
+  hooks.beforeEach(function() {
+    originalRegistryEntries = assign({}, requirejs.entries);
 
     setupResolver();
-  },
+  });
 
-  afterEach() {
+  hooks.afterEach(function() {
     resetRegistry();
-    Ember.assert = originalEmberAssert;
-  }
-});
-
-test('does not require `namespace` to exist at `init` time', function(assert) {
-  assert.expect(0);
-
-  Resolver.create();
-});
-
-test('moduleNameForFullName', function(assert) {
-
-  const testPairs = [
-    ['route:application', 'foo-bar/routes/application'],
-    ['route:application/index', 'foo-bar/routes/application/index'],
-    ['application:main', 'foo-bar/application'],
-    ['route:foo.bar.baz.index', 'foo-bar/routes/foo/bar/baz/index']
-  ];
-
-  assert.expect(testPairs.length);
-
-  testPairs.forEach(pair => {
-    assert.equal(resolver.moduleNameForFullName(pair[0]),
-      pair[1],
-      `fullName was not resolved correctly for ${pair[0]}`)
-  })
-});
-
-test("can lookup something", function(assert){
-  assert.expect(2);
-
-  define('foo-bar/adapters/post', [], function(){
-    assert.ok(true, "adapter was invoked properly");
-
-    return {};
   });
 
-  var adapter = resolver.resolve('adapter:post');
+  test('does not require `namespace` to exist at `init` time', function(assert) {
+    assert.expect(0);
 
-  assert.ok(adapter, 'adapter was returned');
-});
-
-test("can lookup something in another namespace", function(assert){
-  assert.expect(3);
-
-  let expected = {};
-
-  define('other/adapters/post', [], function(){
-    assert.ok(true, "adapter was invoked properly");
-
-    return {
-      default: expected
-    };
+    Resolver.create();
   });
 
-  var adapter = resolver.resolve('other@adapter:post');
+  test('moduleNameForFullName', function(assert) {
 
-  assert.ok(adapter, 'adapter was returned');
-  assert.equal(adapter, expected, 'default export was returned');
-});
+    const testPairs = [
+      ['route:application', 'foo-bar/routes/application'],
+      ['route:application/index', 'foo-bar/routes/application/index'],
+      ['application:main', 'foo-bar/application'],
+      ['route:foo.bar.baz.index', 'foo-bar/routes/foo/bar/baz/index']
+    ];
 
-test("can lookup something in another namespace with different syntax", function(assert){
-  assert.expect(3);
+    assert.expect(testPairs.length);
 
-  let expected = {};
-  define('other/adapters/post', [], function(){
-    assert.ok(true, "adapter was invoked properly");
-
-    return { default: expected };
+    testPairs.forEach(pair => {
+      assert.equal(resolver.moduleNameForFullName(pair[0]),
+        pair[1],
+        `fullName was not resolved correctly for ${pair[0]}`)
+    })
   });
 
-  var adapter = resolver.resolve('adapter:other@post');
+  test("can lookup something", function(assert){
+    assert.expect(2);
 
-  assert.ok(adapter, 'adapter was returned');
-  assert.equal(adapter, expected, 'default export was returned');
-});
+    define('foo-bar/adapters/post', [], function(){
+      assert.ok(true, "adapter was invoked properly");
 
-test("can lookup a helper", function(assert) {
-  assert.expect(3);
+      return {};
+    });
 
-  let expected = { isHelperInstance: true };
-  define('foo-bar/helpers/reverse-list', [], function(){
-    assert.ok(true, "helper was invoked properly");
+    var adapter = resolver.resolve('adapter:post');
 
-    return { default: expected };
+    assert.ok(adapter, 'adapter was returned');
   });
 
-  var helper = resolver.resolve('helper:reverse-list');
+  test("can lookup something in another namespace", function(assert){
+    assert.expect(3);
 
-  assert.ok(helper, 'helper was returned');
-  assert.equal(helper, expected, 'default export was returned');
-});
+    let expected = {};
 
-test('can lookup an engine', function(assert) {
-  assert.expect(3);
+    define('other/adapters/post', [], function(){
+      assert.ok(true, "adapter was invoked properly");
 
-  let expected = {};
-  define('foo-bar/engine', [], function(){
-    assert.ok(true, 'engine was invoked properly');
+      return {
+        default: expected
+      };
+    });
 
-    return { default: expected };
+    var adapter = resolver.resolve('other@adapter:post');
+
+    assert.ok(adapter, 'adapter was returned');
+    assert.equal(adapter, expected, 'default export was returned');
   });
 
-  let engine = resolver.resolve('engine:foo-bar');
+  test("can lookup something in another namespace with different syntax", function(assert){
+    assert.expect(3);
 
-  assert.ok(engine, 'engine was returned');
-  assert.equal(engine, expected, 'default export was returned');
-});
+    let expected = {};
+    define('other/adapters/post', [], function(){
+      assert.ok(true, "adapter was invoked properly");
 
-test('can lookup a route-map', function(assert) {
-  assert.expect(3);
+      return { default: expected };
+    });
 
-  let expected = { isRouteMap: true };
-  define('foo-bar/routes', [], function(){
-    assert.ok(true, 'route-map was invoked properly');
+    var adapter = resolver.resolve('adapter:other@post');
 
-    return { default: expected };
+    assert.ok(adapter, 'adapter was returned');
+    assert.equal(adapter, expected, 'default export was returned');
   });
 
-  let routeMap = resolver.resolve('route-map:foo-bar');
+  test("can lookup a helper", function(assert) {
+    assert.expect(3);
 
-  assert.ok(routeMap, 'route-map was returned');
-  assert.equal(routeMap, expected, 'default export was returned');
-});
+    let expected = { isHelperInstance: true };
+    define('foo-bar/helpers/reverse-list', [], function(){
+      assert.ok(true, "helper was invoked properly");
 
-test('warns if looking up a camelCase name', function(assert){
-  assert.expect(2);
+      return { default: expected };
+    });
 
-  define('foo-bar/helpers/reverse-list', [], function(){
-    return { default: { isHelperInstance: true } };
+    var helper = resolver.resolve('helper:reverse-list');
+
+    assert.ok(helper, 'helper was returned');
+    assert.equal(helper, expected, 'default export was returned');
   });
 
-  Ember.assert = function(message, test) {
-    if (!test) {
-      assert.equal(message, 'Attempted to lookup "helper:reverseList". Use "helper:reverse-list" instead.');
-    }
-  };
+  test('can lookup an engine', function(assert) {
+    assert.expect(3);
 
-  var helper = resolver.resolve('helper:reverseList');
-  assert.ok(!helper, 'no helper was returned');
-});
+    let expected = {};
+    define('foo-bar/engine', [], function(){
+      assert.ok(true, 'engine was invoked properly');
 
-test("will unwrap the 'default' export automatically", function(assert) {
-  define('foo-bar/fruits/orange', [], function(){
-    return { default: 'is awesome' };
+      return { default: expected };
+    });
+
+    let engine = resolver.resolve('engine:foo-bar');
+
+    assert.ok(engine, 'engine was returned');
+    assert.equal(engine, expected, 'default export was returned');
   });
 
-  assert.equal(resolver.resolve('fruit:orange'), 'is awesome', 'adapter was returned');
-});
+  test('can lookup a route-map', function(assert) {
+    assert.expect(3);
 
-test("router:main is hard-coded to prefix/router.js", function(assert) {
-  assert.expect(1);
+    let expected = { isRouteMap: true };
+    define('foo-bar/routes', [], function(){
+      assert.ok(true, 'route-map was invoked properly');
 
-  define('foo-bar/router', [], function(){
-    assert.ok(true, 'router:main was looked up');
-    return 'whatever';
+      return { default: expected };
+    });
+
+    let routeMap = resolver.resolve('route-map:foo-bar');
+
+    assert.ok(routeMap, 'route-map was returned');
+    assert.equal(routeMap, expected, 'default export was returned');
   });
 
-  resolver.resolve('router:main');
-});
+  test('warns if looking up a camelCase name', function(assert){
+    assert.expect(1);
 
-test("store:main is looked up as prefix/store", function(assert) {
-  assert.expect(1);
+    define('foo-bar/helpers/reverse-list', [], function(){
+      return { default: { isHelperInstance: true } };
+    });
 
-  define('foo-bar/store', [], function(){
-    assert.ok(true, 'store:main was looked up');
-    return 'whatever';
+    assert.throws(() => {
+      resolver.resolve('helper:reverseList');
+    }, 'Attempted to lookup "helper:reverseList". Use "helper:reverse-list" instead.');
   });
 
-  resolver.resolve('store:main');
-});
+  test("will unwrap the 'default' export automatically", function(assert) {
+    define('foo-bar/fruits/orange', [], function(){
+      return { default: 'is awesome' };
+    });
 
-test("store:posts as prefix/stores/post", function(assert) {
-  assert.expect(1);
-
-  define('foo-bar/stores/post', [], function(){
-    assert.ok(true, 'store:post was looked up');
-    return 'whatever';
+    assert.equal(resolver.resolve('fruit:orange'), 'is awesome', 'adapter was returned');
   });
 
-  resolver.resolve('store:post');
+  test("router:main is hard-coded to prefix/router.js", function(assert) {
+    assert.expect(1);
+
+    define('foo-bar/router', [], function(){
+      assert.ok(true, 'router:main was looked up');
+      return 'whatever';
+    });
+
+    resolver.resolve('router:main');
+  });
+
+  test("store:main is looked up as prefix/store", function(assert) {
+    assert.expect(1);
+
+    define('foo-bar/store', [], function(){
+      assert.ok(true, 'store:main was looked up');
+      return 'whatever';
+    });
+
+    resolver.resolve('store:main');
+  });
+
+  test("store:posts as prefix/stores/post", function(assert) {
+    assert.expect(1);
+
+    define('foo-bar/stores/post', [], function(){
+      assert.ok(true, 'store:post was looked up');
+      return 'whatever';
+    });
+
+    resolver.resolve('store:post');
+  });
 });

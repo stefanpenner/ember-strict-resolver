@@ -1,7 +1,8 @@
+
 ---
 language: node_js
 node_js:
-  - "6"
+  - "10"
 
 sudo: false
 
@@ -9,13 +10,13 @@ cache:
   yarn: true
 
 env:
-  - EMBER_TRY_SCENARIO=default
-  - EMBER_TRY_SCENARIO=ember-2.10.2
-  - EMBER_TRY_SCENARIO=ember-2.11.3
-  - EMBER_TRY_SCENARIO=ember-2.12.2
-  - EMBER_TRY_SCENARIO=ember-2.13.3
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
+  EMBER_TRY_SCENARIO=ember-lts-3.12
+  EMBER_TRY_SCENARIO=ember-lts-3.16
+  EMBER_TRY_SCENARIO=ember-release
+  EMBER_TRY_SCENARIO=ember-beta
+  EMBER_TRY_SCENARIO=ember-canary
+  EMBER_TRY_SCENARIO=ember-default-with-jquery
+  EMBER_TRY_SCENARIO=ember-classic
 
 matrix:
   fast_finish: true

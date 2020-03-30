@@ -1,7 +1,7 @@
-import require from 'require';
-import Ember from 'ember';
+import { assert } from '@ember/debug';
+import { dasherize } from '@ember/string';
 
-const { dasherize } = Ember.String;
+import require from 'require';
 
 export default class Resolver {
   constructor(attrs) {
@@ -15,8 +15,7 @@ export default class Resolver {
   }
 
   moduleNameForFullName(fullName) {
-    Ember.assert(`Attempted to lookup "${fullName}". Use "${dasherize(fullName)}" instead.`,
-      !fullName.match(/[a-z]+[A-Z]+/));
+    assert(`Attempted to lookup "${fullName}". Use "${dasherize(fullName)}" instead.`, !fullName.match(/[a-z]+[A-Z]+/));
 
     let prefix, type, name, moduleName;
 
