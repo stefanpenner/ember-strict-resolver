@@ -45,7 +45,8 @@ module('Unit | strict-resolver | basic', function(hooks) {
       ['route:application', 'foo-bar/routes/application'],
       ['route:application/index', 'foo-bar/routes/application/index'],
       ['application:main', 'foo-bar/application'],
-      ['route:foo.bar.baz.index', 'foo-bar/routes/foo/bar/baz/index']
+      ['route:foo.bar.baz.index', 'foo-bar/routes/foo/bar/baz/index'],
+      ['config:environment', 'foo-bar/config/environment']
     ];
 
     assert.expect(testPairs.length);
