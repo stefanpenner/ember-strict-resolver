@@ -5,8 +5,13 @@ import require from 'require';
 
 export default class Resolver {
   constructor(attrs) {
+    this.failSet = {};
+
     if (attrs) {
       this.namespace = attrs.namespace;
+      // used as a static map from one format to annother
+      // { 'service:somethingThatIsDashed', 'service:something-that-is-dashed' }
+      this.failSet = attrs.failSet || {};
     }
   }
 
@@ -57,7 +62,8 @@ export default class Resolver {
   }
 
   resolve(fullName) {
-    let moduleName = this.moduleNameForFullName(fullName);
+    const _fullName = this.failSet[fullName] || fullName;
+    const moduleName = this.moduleNameForFullName(_fullName);
 
     if (require.has(moduleName)) {
       // hit
