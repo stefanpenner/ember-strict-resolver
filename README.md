@@ -33,7 +33,7 @@ Migrating away from use the _ember-resolver/classic_ can be done in piecemeal by
 import StrictResolver from 'ember-strict-resolver';
 
 export StrictResolver.create({
-  failSet: {
+  legacyMappings: {
     'service:camelCaseNotSupported': 'service:camel-case-not-supported'
   }
 })
