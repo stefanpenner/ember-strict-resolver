@@ -28,7 +28,7 @@ Ember.Registry.prototype.normalize = function (i) { return i; }
 Migrating away from use the _ember-resolver/classic_ can be done in piecemeal by supporting a sub-set of the old resolution formats.
 
 ```js
-> _app/resolver.js_
+// app/resolver.js
 
 import Resolver from 'ember-strict-resolver';
 
