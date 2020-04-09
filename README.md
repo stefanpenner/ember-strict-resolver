@@ -38,7 +38,7 @@ export default class extends Resolver {
   };
 
   resolve(_fullName) {
-    const fullName = this.legacyMappings[fullName] || fullName;
+    const fullName = this.legacyMappings[_fullName] || _fullName;
 
     return super.resolve(fullName);
   }
