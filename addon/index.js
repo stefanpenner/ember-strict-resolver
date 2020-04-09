@@ -7,9 +7,6 @@ export default class Resolver {
   constructor(attrs) {
     if (attrs) {
       this.namespace = attrs.namespace;
-      // used as a static map from one format to annother
-      // { 'service:somethingThatIsDashed', 'service:something-that-is-dashed' }
-      this.legacyMappings = attrs.legacyMappings || {};
     }
   }
 
@@ -60,8 +57,7 @@ export default class Resolver {
   }
 
   resolve(fullName) {
-    const _fullName = this.legacyMappings && this.legacyMappings[fullName] || fullName;
-    const moduleName = this.moduleNameForFullName(_fullName);
+    const moduleName = this.moduleNameForFullName(fullName);
 
     if (require.has(moduleName)) {
       // hit

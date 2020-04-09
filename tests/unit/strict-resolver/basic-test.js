@@ -58,22 +58,6 @@ module('Unit | strict-resolver | basic', function(hooks) {
     })
   });
 
-  test('can lookup via legacyMappings for migrating off of ember-resolver/classic', function(assert){
-    assert.expect(2);
-
-    setupResolver({ legacyMappings: { 'service:somethingThatIsDashed': 'service:something-that-is-dashed' }, namespace: { modulePrefix: 'foo-bar' } })
-
-    define('foo-bar/services/something-that-is-dashed', [], function(){
-      assert.ok(true, "service was invoked properly");
-
-      return {};
-    });
-
-    var service = resolver.resolve('service:somethingThatIsDashed');
-
-    assert.ok(service, 'service was returned');
-  });
-
   test('can lookup something', function(assert){
     assert.expect(2);
 

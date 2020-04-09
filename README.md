@@ -30,13 +30,19 @@ Migrating away from use the _ember-resolver/classic_ can be done in piecemeal by
 ```js
 > _app/resolver.js_
 
-import StrictResolver from 'ember-strict-resolver';
+import Resolver from 'ember-strict-resolver';
 
-export StrictResolver.create({
-  legacyMappings: {
+export default class extends Resolver {
+  legacyMappings = {
     'service:camelCaseNotSupported': 'service:camel-case-not-supported'
+  };
+
+  resolve(_fullName) {
+    const fullName = this.legacyMappings[fullName] || fullName;
+
+    return super.resolve(fullName);
   }
-})
+}
 ```
 
 This will allow you file PRs with libraries that currently do not support the strict resolver in its entirety.
