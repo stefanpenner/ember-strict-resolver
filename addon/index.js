@@ -57,7 +57,7 @@ export default class Resolver {
   }
 
   resolve(fullName) {
-    let moduleName = this.moduleNameForFullName(fullName);
+    const moduleName = this.moduleNameForFullName(fullName);
 
     if (require.has(moduleName)) {
       // hit

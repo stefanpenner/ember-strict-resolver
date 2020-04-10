@@ -23,6 +23,29 @@ _For additional improvements when fully using the ember-strict-resolver monkey p
 Ember.Registry.prototype.normalize = function (i) { return i; }
 ```
 
+## Migration
+
+Migrating away from use the _ember-resolver/classic_ can be done in piecemeal by supporting a sub-set of the old resolution formats.
+
+```js
+// app/resolver.js
+
+import Resolver from 'ember-strict-resolver';
+
+export default class extends Resolver {
+  legacyMappings = {
+    'service:camelCaseNotSupported': 'service:camel-case-not-supported'
+  };
+
+  resolve(_fullName) {
+    const fullName = this.legacyMappings[_fullName] || _fullName;
+
+    return super.resolve(fullName);
+  }
+}
+```
+
+This will allow you file PRs with libraries that currently do not support the strict resolver in its entirety.
 
 # Development of the addon
 

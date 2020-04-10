@@ -58,7 +58,7 @@ module('Unit | strict-resolver | basic', function(hooks) {
     })
   });
 
-  test("can lookup something", function(assert){
+  test('can lookup something', function(assert){
     assert.expect(2);
 
     define('foo-bar/adapters/post', [], function(){
