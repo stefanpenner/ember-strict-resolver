@@ -47,6 +47,48 @@ export default class extends Resolver {
 
 This will allow you file PRs with libraries that currently do not support the strict resolver in its entirety.
 
+In the event that you have a component that is failing to resolve correctly with the error `Attempted to lookup "helper:nameOfVariable". Use "helper:name-of-variable" instead.` please convert your template to use explicit-this. The template lint can be enabled by turning on [no-implicit-this](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-implicit-this.md).
+
+An example of what this looks like is the following
+
+```hbs
+// addon/components/templates/foo.hbs
+
+<div>
+  {{fullName}}
+</div>
+```
+
+This will result in the error, `Attempted to lookup "helper:fullName". Use "helper:full-name" instead.`. The fix for this would be to decide if this is a argument being passed into foo or if this is a local property.
+
+_fullName_ is coming from an invocation of _Foo_ like the following:
+
+```
+<Foo
+  @fullName="The Teamster"
+/>
+```
+
+Then the fix for your template would be:
+
+```hbs
+// addon/components/templates/foo.hbs
+
+<div>
+  {{@fullName}}
+</div>
+```
+
+If _fullName_ is a property on your component the fix would be:
+
+```hbs
+// addon/components/templates/foo.hbs
+
+<div>
+  {{this.fullName}}
+</div>
+```
+
 # Development of the addon
 
 * `git clone <repository-url>` this repository
