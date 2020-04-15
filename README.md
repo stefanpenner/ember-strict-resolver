@@ -4,6 +4,9 @@
 
 Fast, concise, zero fun resolver for ember apps.
 
+Removes a bunch of stuff like pod support, bunch of a fallbacks, a bunch of different normalization’s etc.
+Runs faster, it’s smaller, it doesn’t have all the strange ambiguity and tech debt.
+
 ## installation
 ```
 ember install ember-strict-resolver
