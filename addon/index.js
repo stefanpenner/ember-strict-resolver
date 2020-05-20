@@ -41,6 +41,11 @@ export default class Resolver {
       name = typeNameParts[1];
     }
 
+    if (type === 'template' && prefix.lastIndexOf('components/', 0) === 0) {
+      name = `components/${name}`;
+      prefix = prefix.slice(11);
+    }
+
     if (name === 'main') {
       moduleName = `${prefix}/${type}`;
     } else if (type === 'engine') {
