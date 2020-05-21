@@ -207,4 +207,19 @@ module('Unit | strict-resolver | basic', function(hooks) {
 
     resolver.resolve('store:post');
   });
+
+  test("can lookup a component template in another namespace with different syntax", function(assert) {
+    assert.expect(2);
+
+    let expected = { isTemplate: true };
+    define('other/templates/components/foo-bar', [], function(){
+      assert.ok(true, "template was looked up properly");
+
+      return { default: expected };
+    });
+
+    var template = resolver.resolve('template:components/other@foo-bar');
+
+    assert.equal(template, expected, 'default export was returned');
+  });
 });
