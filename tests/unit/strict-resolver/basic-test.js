@@ -222,4 +222,14 @@ module('Unit | strict-resolver | basic', function(hooks) {
 
     assert.equal(template, expected, 'default export was returned');
   });
+
+  test("does not lookup index when top level component is specified (route:view)", function(assert) {
+    assert.expect(1);
+
+    define('foo-bar/routes/view/index', [], function(){
+      assert.ok(false, 'should not have been required');
+    });
+
+    assert.ok(!resolver.resolve('route:view'), 'route was not returned');
+  });
 });

@@ -1,3 +1,5 @@
+/* globals requirejs */
+
 import { assert } from '@ember/debug';
 import { dasherize } from '@ember/string';
 
@@ -12,6 +14,10 @@ export default class Resolver {
 
   static create(args) {
     return new this(args);
+  }
+
+  has(moduleName) {
+    return moduleName in (requirejs.entries || requirejs._eak_seen);
   }
 
   moduleNameForFullName(fullName) {
@@ -64,7 +70,7 @@ export default class Resolver {
   resolve(fullName) {
     const moduleName = this.moduleNameForFullName(fullName);
 
-    if (require.has(moduleName)) {
+    if (this.has(moduleName)) {
       // hit
       return require(moduleName)['default'];
     }
