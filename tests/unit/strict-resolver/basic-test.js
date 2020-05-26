@@ -155,16 +155,15 @@ module('Unit | strict-resolver | basic', function(hooks) {
     assert.equal(routeMap, expected, 'default export was returned');
   });
 
-  test('warns if looking up a camelCase name', function(assert){
-    assert.expect(1);
+  test('warns if normalizations up a camelCase service name', function(assert){
+    assert.expect(2);
 
-    define('foo-bar/helpers/reverse-list', [], function(){
+    define('foo-bar/services/reverse-list', [], function(){
       return { default: { isHelperInstance: true } };
     });
 
-    assert.throws(() => {
-      resolver.resolve('helper:reverseList');
-    }, 'Attempted to lookup "helper:reverseList". Use "helper:reverse-list" instead.');
+    assert.equal('service:reverseList', resolver.normalize('service:reverseList'), 'no service was returned');
+    assert.expectWarning('Attempted to lookup "service:reverseList". Use "service:reverse-list" instead.');
   });
 
   test("will unwrap the 'default' export automatically", function(assert) {
@@ -231,5 +230,40 @@ module('Unit | strict-resolver | basic', function(hooks) {
     });
 
     assert.ok(!resolver.resolve('route:view'), 'route was not returned');
+  });
+
+  test("can lookup an engine from a scoped package", function(assert) {
+    assert.expect(3);
+
+    let expected = {};
+    define('@some-scope/some-module/engine', [], function(){
+      assert.ok(true, "engine was invoked properly");
+
+      return { default: expected };
+    });
+
+    var engine = resolver.resolve('engine:@some-scope/some-module');
+
+    assert.ok(engine, 'engine was returned');
+    assert.equal(engine, expected, 'default export was returned');
+  });
+
+  test("can lookup something in another namespace with an @ scope", function(assert){
+    assert.expect(3);
+
+    let expected = {};
+
+    define('@scope/other/adapters/post', [], function(){
+      assert.ok(true, "adapter was invoked properly");
+
+      return {
+        default: expected
+      };
+    });
+
+    var adapter = resolver.resolve('@scope/other@adapter:post');
+
+    assert.ok(adapter, 'adapter was returned');
+    assert.equal(adapter, expected, 'default export was returned');
   });
 });
