@@ -1,3 +1,8 @@
+# 1.2.0 (05/25/2020)
+
+- [enhancement] bring down upstream, `ember-resolver`, parsing logic, ensures that we don't assert against types that are not required to be dasherized and also put that behind a debug flag
+- [bug] ensure that require key exists before trying to retrieve from the require registry
+
 # 1.1.1 (05/21/2020)
 
 - Ensure internal `layoutFor` lookups for namespaced templates works
