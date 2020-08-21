@@ -39,8 +39,15 @@ module('Unit | strict-resolver | basic', function(hooks) {
     Resolver.create();
   });
 
-  test('moduleNameForFullName', function(assert) {
+  test('is module based', function (assert) {
+    assert.strictEqual(
+      resolver.moduleBasedResolver,
+      true,
+      'resolver declares itself module-based to enable router features'
+    );
+  });
 
+  test('moduleNameForFullName', function (assert) {
     const testPairs = [
       ['route:application', 'foo-bar/routes/application'],
       ['route:application/index', 'foo-bar/routes/application/index'],
