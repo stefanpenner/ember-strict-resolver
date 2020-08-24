@@ -1,3 +1,7 @@
+# 1.2.1 (08/24/2020)
+
+- [bug] resolver.moduleBasedResolver must be set for the ember router to enable loading substates, so set that property in the constructor.
+
 # 1.2.0 (05/25/2020)
 
 - [enhancement] bring down upstream, `ember-resolver`, parsing logic, ensures that we don't assert against types that are not required to be dasherized and also put that behind a debug flag
