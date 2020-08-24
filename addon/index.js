@@ -11,6 +11,9 @@ export default class Resolver {
     if (attrs) {
       this.namespace = attrs.namespace;
     }
+    // secret handshake with router to ensure substates are enabled
+    // see https://github.com/emberjs/ember.js/blob/a429dc327ee6ef97d948a83e727886c75c6fe043/packages/%40ember/-internals/routing/lib/system/router.ts#L344
+    this.moduleBasedResolver = true;
   }
 
   static create(args) {
