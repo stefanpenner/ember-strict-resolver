@@ -1,3 +1,7 @@
+# 1.3.0 (10/09/2020)
+
+- [dependencies] bumps `ember-cli-htmlbars@4.2.3` -> `ember-cli-htmlbars@5.3.1`
+
 # 1.2.1 (08/24/2020)
 
 - [bug] resolver.moduleBasedResolver must be set for the ember router to enable loading substates, so set that property in the constructor.
