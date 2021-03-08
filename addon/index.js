@@ -111,7 +111,7 @@ export default class Resolver {
 
     if (this.has(moduleName)) {
       // hit
-      return require(moduleName)['default'];
+      return this._requireDefaultExport(moduleName);
     }
     // miss
   }
@@ -126,5 +126,15 @@ export default class Resolver {
     }
 
     return fullName;
+  }
+
+  _requireDefaultExport(normalizedModuleName) {
+    const module = require(normalizedModuleName);
+
+    if (module && module['default']) {
+      return module['default'];
+    }
+
+    return module;
   }
 }
