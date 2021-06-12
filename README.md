@@ -27,7 +27,7 @@ Ember.Registry.prototype.normalize = function (i) { return i; }
 
 Migrating away from use the _ember-resolver/classic_ can be done in piecemeal by supporting a sub-set of the old resolution formats.
 
-> noramlize is needed, because without it you will get errors related to failing to be able to inject services that were never noramlized in the registry.
+> normalize is needed, because without it you will get errors related to failing to be able to inject services that were never normalized in the registry.
 
 ```js
 // app/resolver.js
